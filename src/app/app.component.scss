@@ -1,0 +1,14 @@
+.content {
+    padding: 20px;          
+    min-height: calc(100vh - 110px); 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+  }
+  
+  @media screen and (max-width: 768px) {
+    .content {
+      padding: 15px; 
+    }
+  }
+  

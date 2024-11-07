@@ -1,0 +1,50 @@
+<form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="nome" placeholder="Nome do Cliente" />
+      <mat-error *ngIf="clienteForm.get('nome')?.hasError('required')">
+        O nome é obrigatório.
+      </mat-error>
+      <mat-error *ngIf="clienteForm.get('nome')?.hasError('minlength')">
+        O nome deve ter mais de 4 caracteres.
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Idade</mat-label>
+      <input matInput type="number" formControlName="idade" placeholder="Idade do Cliente" />
+      <mat-error *ngIf="clienteForm.get('idade')?.hasError('required')">
+        A idade é obrigatória.
+      </mat-error>
+      <mat-error *ngIf="clienteForm.get('idade')?.hasError('min')">
+        A idade deve ser maior ou igual a 18.
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="Email do Cliente" />
+      <mat-error *ngIf="clienteForm.get('email')?.hasError('required')">
+        O email é obrigatório.
+      </mat-error>
+      <mat-error *ngIf="clienteForm.get('email')?.hasError('email')">
+        O email informado não é válido.
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Número da Conta</mat-label>
+      <input matInput formControlName="numeroConta" placeholder="Número da Conta" />
+      <mat-error *ngIf="clienteForm.get('numeroConta')?.hasError('required')">
+        O número da conta é obrigatório.
+      </mat-error>
+      <mat-error *ngIf="clienteForm.get('numeroConta')?.hasError('pattern')">
+        O número da conta deve ser um valor numérico.
+      </mat-error>
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" type="submit" [disabled]="!clienteForm.valid">
+      Cadastrar Cliente
+    </button>
+  </form>
+  
