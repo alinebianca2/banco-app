@@ -15,6 +15,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 
 
@@ -33,7 +35,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatListModule,
     MatCardModule,
     MatIconModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSnackBarModule
   ],
   exports: [
     HeaderComponent,
@@ -46,7 +49,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatListModule,
     MatCardModule,
     MatIconModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSnackBarModule
+
+    
   ]
 })
 export class SharedModule { }
