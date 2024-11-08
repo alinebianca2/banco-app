@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ClienteService } from '../../cliente/cliente.service';
 
 interface Transacao {
   tipo: string;
@@ -23,33 +24,44 @@ export class ExtratoComponent implements OnInit {
   ];
 
   transacoesFiltradas: Transacao[] = [];
-  saldo: number = 0;  // Adicionando a propriedade saldo
+  saldo: number = 0;  
   displayedColumns: string[] = ['tipo', 'valor', 'descricao'];
+  clientName: string = "";
+  saldoTotal: number = 0;
+  extrato: any[] = [];
 
-  constructor(private route: ActivatedRoute) {}
+
+  constructor(private route: ActivatedRoute, private clienteService: ClienteService) {}
 
   ngOnInit(): void {
-    // Pegando o clienteId da URL
     const clienteIdFromRoute = this.route.snapshot.paramMap.get('clientId');
+    const ID = Number(clienteIdFromRoute)
+
+
+    this.clienteService.getClienteNome(ID).subscribe(
+      (cliente: any) => {
+        const nomeCliente = cliente.nome;
+        this.clientName = nomeCliente.charAt(0).toUpperCase() + nomeCliente.slice(1)
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+
+    this.clienteService.getSomaExtrato(ID).subscribe(
+      (response: any) => {
+        if (response && response.extrato && Array.isArray(response.extrato)) {
+          this.transacoesFiltradas = response.extrato; 
+        } else {
+          console.error(response);
+        }
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+  }
+
   
-    if (clienteIdFromRoute) {
-      this.clienteId = +clienteIdFromRoute;  // Convertendo para número
-      this.filtrarTransacoesPorClienteId();  // Filtrando as transações
-      this.calcularSaldo();  // Calculando o saldo
-    } else {
-      console.error('clienteId não encontrado na URL!');
-    }
-  }
 
-  // Função para filtrar transações com base no clienteId
-  filtrarTransacoesPorClienteId(): void {
-    this.transacoesFiltradas = this.transacoes.filter(transacao => transacao.clienteId === this.clienteId);
-  }
-
-  // Função para calcular o saldo
-  calcularSaldo(): void {
-    this.saldo = this.transacoesFiltradas.reduce((total, transacao) => {
-      return transacao.tipo === 'Débito' ? total - transacao.valor : total + transacao.valor;
-    }, 0);
-  }
-}

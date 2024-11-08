@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';  
 import { MatTableModule } from '@angular/material/table';
+import { NgxMaskDirective, NgxMaskPipe, NgxMaskModule } from 'ngx-mask';  
 
 
 
@@ -36,7 +37,8 @@ import { MatTableModule } from '@angular/material/table';
     MatInputModule,
     MatSnackBarModule,
     MatTableModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,8 +1,7 @@
 <div class="extrato-container">
   <mat-card class="header-card">
     <mat-card-header>
-      <mat-card-title>Extrato de Transações</mat-card-title>
-      <mat-card-subtitle>Cliente: {{ clienteId }}</mat-card-subtitle>
+      <mat-card-title>Extrato de Transações - {{clientName}}</mat-card-title>
     </mat-card-header>
   </mat-card>
 
@@ -25,7 +24,7 @@
 
         <ng-container matColumnDef="descricao">
           <th mat-header-cell *matHeaderCellDef> Descrição </th>
-          <td mat-cell *matCellDef="let transacao"> {{ transacao.descricao || 'Não informada' }} </td>
+          <td mat-cell *matCellDef="let transacao"> {{ transacao.data | date:'dd/MM/yyyy HH:mm:ss' }} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

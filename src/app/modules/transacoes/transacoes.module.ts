@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { TransacoesComponent } from './transacoes/transacoes.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxMaskDirective, NgxMaskPipe, NgxMaskModule } from 'ngx-mask';  
+
 
 
 
@@ -14,7 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot()
 
   ]
 })
