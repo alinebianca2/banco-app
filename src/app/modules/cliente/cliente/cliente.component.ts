@@ -15,6 +15,7 @@ export class ClienteComponent implements OnInit {
   clienteCadastrado = false;
   clienteId: number = 0;  
   clientes: Array<any> = [];  
+  formularioEnviado: boolean = false;
 
   constructor(private snackBar: MatSnackBar, private router: Router, private clienteService: ClienteService) {
   }
@@ -34,20 +35,23 @@ export class ClienteComponent implements OnInit {
 
 
   onSubmit() {
+    this.formularioEnviado = true;
+  
     if (this.clienteForm.valid) {
       const clienteData = this.clienteForm.value;
-
+  
       this.clienteService.cadastrarCliente(clienteData).subscribe(
         (response) => {
-          this.clienteId = response.id; 
+          this.clienteId = response.id;
           this.clienteCadastrado = true;
-
-          this.snackBar.open(`Cliente cadastrado com sucesso! ID: ${this.clienteId}`, 'Fechar', {
+  
+          this.snackBar.open(`Cliente cadastrado com sucesso!`, 'Fechar', {
             duration: 3000,
             panelClass: ['success-snackbar'],
           });
-
+  
           this.clienteForm.reset();
+          this.formularioEnviado = false;
         },
         (error) => {
           console.error('Erro ao cadastrar cliente', error);
@@ -61,6 +65,7 @@ export class ClienteComponent implements OnInit {
       console.log('Por favor, preencha todos os campos corretamente.');
     }
   }
+  
 
 
   irParaTransacoes() {
